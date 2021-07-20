@@ -2,12 +2,12 @@ import discord
 import os
 import random
 
+chance = 25
 
 client = discord.Client()
 token = os.getenv('TOKEN')
 
 def checkChance():
-    chance = 20
     current = random.randrange(0, 100)
     return chance > current
 
@@ -17,9 +17,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message : str):
-    if (message.author == client.user):
-        return
-    if not(checkChance()):
+    if ((message.author == client.user) and not(checkChance())):
         return
     msg = str(message.content).lower()
     if msg.endswith('пизда'):
